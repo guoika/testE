@@ -1,0 +1,32 @@
+<app-menu-header [option]="option">
+</app-menu-header>
+<div class="report">
+    <div class="report-date">
+        <div class="report-button">
+            <button [ngClass]="{'report-button-all': showAll, 'report-button-random': !showAll}" (click)="showAll = false; getReport();">All time</button>
+            <button [ngClass]="{'report-button-all': !showAll, 'report-button-random': showAll}" (click)="showAll = true; getReport(); ">Random</button>
+        </div>
+        <div class="report-date-change" *ngIf="showAll">
+            <div class="start-date">
+                <span>From</span>
+                <div class="start-date-change">
+                    <img (click)="backFromDate(); getReport();" src="assets/svg/back-left.png" alt="">
+                    <span>{{startDate | date :'MMMM y'}}</span>
+                    <img (click)="nextFromDate(); getReport();" src="assets/svg/back-right.png" alt="">
+                </div>
+            </div>
+            <div class="start-date">
+                <span>To</span>
+                <div class="start-date-change">
+                    <img (click)="backToDate(); getReport();" src="assets/svg/back-left.png" alt="">
+                    <span>{{toDate | date :'MMMM y'}}</span>
+                    <img (click)="nextToDate(); getReport();" src="assets/svg/back-right.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="report-custom">
+        <button (click)="openDialog()">Customize columns</button>
+    </div>
+    <app-table [data]="data" [config]="configData"></app-table>
+</div>

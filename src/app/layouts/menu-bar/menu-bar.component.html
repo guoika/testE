@@ -1,0 +1,22 @@
+<div class="menu-bar">
+    <div class="menu-bar-content">
+        <div class="logo">
+          <ng-container *ngIf="companyDetal && companyDetal.MediaURL && !companyDetal?.MediaURL.includes('logo.jpg'); else  templateImg" >
+            <img src="{{companyDetal?.MediaURL}}">
+          </ng-container>
+          <ng-template #templateImg>
+            <img src="assets/svg/logo-big.svg">
+          </ng-template>
+            <!-- <img src="{{companyDetal?.MediaURL}}"> -->
+            <!-- <img src="{{companyDetal?.MediaURL}}"> -->
+        </div>
+        <div class="nav-bar">
+            <div class="nav-item" *ngFor="let item of listNav" routerLinkActive="selected">
+                <a class="nav-link" [routerLink]="item.router">
+                    <img [src]="item.icon" />
+                    <div class="nav-link-text">{{item.name}}</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

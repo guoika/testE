@@ -1,0 +1,133 @@
+<div class="form-create" [style.height]="configCss?.height" [class]="configCss?.css" *ngIf="configCss.isShowPayment === false">
+  <div class="content row">
+    <div class="col-6 title" [class]="option?.avatar === true ? 'col-6 title' :'acb'">
+      {{option?.titles[0]}}
+    </div>
+    <div class="col-6 d-flex align-item-center justify-content-end ">
+      <app-button *ngIf="button?.isEventUpdate" class="action" [isSmall]="true" [buttonType]="button?.listUpdate"
+        (callback)="handleEvent($event)"></app-button>
+      <app-button *ngIf="!button?.isEventUpdate" class="action" [isSmall]="true" [buttonType]="button?.listNoUpdate"
+        (callback)="handleEvent($event)"></app-button>
+    </div>
+  </div>
+  <div class="content row">
+    <div class="col-avatar" [class]="option?.avatar === true ? 'col-lg-2' :'acb'">
+      <div class="avatar" *ngIf="option.avatar">
+        <img *ngIf="profileImageString" [src]="profileImageString" class="img-fluid" />
+        <br />
+        <label for="profileImage">
+          <img src="assets/svg/camera-icon.svg" />
+        </label>
+        <input #ProfileImage type="file" accept="image/*" id="profileImage"
+          (change)="processFileProfileImage(ProfileImage.files)" hidden required />
+        <br />
+      </div>
+    </div>
+    <div [class]="option?.avatar === true ? 'col-lg-10' :'col-12'">
+      <div class="row">
+
+        <div *ngFor="let item of data" class="row list" [class]="option?.col">
+          <div class="title-input"> {{item?.label}} </div>
+          <div class="" [class]="item.class">
+            <div
+              *ngIf="item.type ==='email' || item.type ==='text' || item.type ==='number' || item.type ==='file' || item.type ==='date'">
+              <input [readonly]="!button?.isEventUpdate" [class.text-full]="isService" [class.input-text]="true"
+                [type]="item.type" [id]="item.id" [name]="item.name" [(ngModel)]="model[item.id]"
+                [readonly]="(!button?.isEventUpdate)? 'true': ''">
+              <!-- <p><u>{{model[item.id]}}</u></p> -->
+            </div>
+            <div *ngIf="item.type ==='selected'">
+              <select class="input-text" [(ngModel)]="model[item.id]"
+                [disabled]="(!button?.isEventUpdate)? true : null">
+                <option *ngFor="let i of item.data" [ngValue]="i?.value">
+                  {{i?.Name}}
+                </option>
+              </select>
+            </div>
+            <!-- chưa customer-->
+            <div *ngIf="item.type ==='radio'">
+              <mat-radio-group [(ngModel)]="model[item.id]" aria-label="Select an option">
+                <mat-radio-button value="1">Nam</mat-radio-button>
+                <mat-radio-button value="2">Nữ</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div *ngIf="item.type ==='checkbox'">
+              checkbox
+            </div>
+            <div *ngIf="item.type ==='link'">
+              link
+            </div>
+          </div>
+        </div>
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="form-create" *ngIf="configCss.isShowPayment === true" [class]="configCss?.css">
+  <div class="content row">
+    <div class="col-6 title">
+      {{option?.titles[1]}}
+    </div>
+    <div class="col-6 d-flex align-item-center justify-content-end ">
+      <!-- <app-button class="action" [buttonType]="button?.listReview" (callback)="handleEvent($event)"></app-button> -->
+    </div>
+  </div>
+  <ng-container *ngIf="dataModel?.lstSub">
+    <div class="content row" *ngFor="let item of dataModel?.lstSub" >
+      <div class="col-9 context">
+        <div class="text-context">
+          Your next payment date is on {{item.ExpiredDate | date: 'dd/MM/yyyy'}}.
+        </div>
+        <div class="text-context">
+          Current users: {{item.CurrentTotalAccount}}/{{item.AvailableAccount}}
+        </div>
+        <div class="text-context" *ngIf="item.SubscriptionNotification">
+          {{item.SubscriptionNotification}}
+        </div>
+      </div>
+      <div class="col-3 d-flex align-item-center justify-content-end ">
+        <app-button class="action" [buttonType]="button?.listRenew" (callback)="setData(item, $event)"></app-button>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<div class="form-create" *ngIf="configCss.isShowPayment === true" [style.height]="configCss?.height" [class]="configCss?.css">
+  <div class="content row">
+    <div class="col-6 title">
+      {{option?.titles[2]}}
+    </div>
+    <div class="col-6 d-flex align-item-center justify-content-end ">
+      <app-button class="action" [isSmall]="true" [buttonType]="button?.listPayment" (callback)="handleEvent($event)">
+      </app-button>
+    </div>
+  </div>
+  <div class="content row">
+    <div class="col-6 context">
+      <div class="text-context grid" *ngFor="let item of dataModel?.lstPayment">
+        <!-- lstPayment -->
+        <div class="icon" [ngStyle]="{'margin-top': item.defaultMethod === 'no' ? '10px' : '0px'}">
+          <img src="assets/svg/paypal.svg" alt="">
+        </div>
+        <div [ngStyle]="{'margin-top': item.defaultMethod === 'no' ? '10px' : '0px'}">
+          {{item.ShowName}}
+          <ng-container *ngIf="item.defaultMethod === 'yes'">(Default)</ng-container>
+
+        </div>
+        <div class="list-button">
+          <img src="assets/svg/emr-admin-icon-delete.svg" alt="" *ngIf="item.defaultMethod === 'no'" [ngStyle]="{'margin-top': item.defaultMethod === 'no' ? '10px' : '0px'}" (click)="setData(item, 'delete')">
+          <app-button class="action" [isSmall]="true" *ngIf="item.defaultMethod === 'no'" [buttonType]="button?.listDefault" (callback)="setData(item, $event)">
+          </app-button>
+          <!-- <img src="assets/svg/emr-admin-icon-delete.svg" alt="" (click)="delete(item, 'delete')"> -->
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-6 d-flex align-item-center justify-content-end ">
+      <app-button *ngIf="button?.isEventUpdate" class="action" [isSmall]="true" [buttonType]="button?.listUpdate"
+        (callback)="handleEvent($event)"></app-button>
+      <app-button *ngIf="!button?.isEventUpdate" class="action" [isSmall]="true" [buttonType]="button?.listNoUpdate"
+        (callback)="handleEvent($event)"></app-button>
+    </div> -->
+  </div>
+</div>

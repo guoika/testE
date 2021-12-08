@@ -1,0 +1,11 @@
+<app-menu-header [option]="option">
+</app-menu-header>
+<div class="row layout-content">
+    <div class="col-3" *ngFor="let i of listItem">
+        <div class=" item" [routerLink]="i.router">
+            <img src="{{i?.icon}}" alt="">
+            {{i?.text}}
+        </div>
+    </div>
+
+</div>

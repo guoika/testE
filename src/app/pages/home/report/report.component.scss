@@ -1,0 +1,84 @@
+.report {
+    padding: 40px 30px;
+    position: relative;
+    max-height: 80vh;
+    overflow: hidden;
+    .report-custom {
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 50px;
+        button {
+            width: 315px;
+            height: 56px;
+            font-size: 25px;
+            font-weight: 600;
+            background-color: #9fb9c8;
+            color: #fff;
+            text-align: center;
+            border-radius: 15px;
+            border: none;
+        }
+    }
+    .report-date {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 40px;
+        left: 25%;
+        .report-button {
+            display: flex;
+            .report-button-all {
+                width: 75px;
+                height: 60px;
+                border-radius: 20px;
+                box-shadow: 6px 6px 20px -9px #707070;
+                border: none;
+                color: #707070;
+                font-size: 16px;
+                font-weight: 600;
+                margin-right: 20px;
+            }
+            .report-button-random {
+                width: 75px;
+                height: 60px;
+                border-radius: 20px;
+                background-color: #707070;
+                border: none;
+                color: #fff;
+                font-size: 16px;
+                font-weight: 600;
+            }
+        }
+        .report-date-change {
+            margin-left: 30px;
+            display: flex;
+            .start-date {
+                display: flex;
+                align-items: center;
+                margin-left: 15px;
+                span {
+                    color: #000000;
+                    font-size: 24px;
+                    font-weight: 600;
+                    margin-right: 30px;
+                }
+                .start-date-change {
+                    display: flex;
+                    justify-content: space-around;
+                    width: 280px;
+                    box-shadow: 6px 6px 20px -9px #707070;
+                    border-radius: 20px;
+                    padding: 20px;
+                    span {
+                        margin: 0;
+                        display: block;
+                        width: 80%;
+                        text-align: center;
+                        overflow: hidden;
+                    }
+                }
+            }
+        }
+    }
+}

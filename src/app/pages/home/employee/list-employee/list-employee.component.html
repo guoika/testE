@@ -1,0 +1,44 @@
+<app-menu-header [option]="option" (callback)="handleChangeValueSearch($event)">
+</app-menu-header>
+<div class="row header-box1">
+  <div class=" row">
+    <div class="col-9"></div>
+    <button class="col-3 resigned" (click)="isShowActive = !isShowActive">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="9.215" height="12.555" viewBox="0 0 9.215 12.555">
+        <defs>
+          <clipPath id="clip-path">
+            <rect width="9" height="12.4" fill="none"/>
+          </clipPath>
+        </defs>
+        <g id="_Icons_19_Right_3" data-name="_Icons / 19 Right_3" transform="translate(8.999 12.555) rotate(-179)" clip-path="url(#clip-path)">
+          <path id="_19_Right_3" data-name="19 Right_3" d="M1.44.177l7.2,5.314a.877.877,0,0,1,0,1.417l-7.2,5.314a.912.912,0,0,1-.944.083.884.884,0,0,1-.5-.795V.883A.884.884,0,0,1,.5.093.912.912,0,0,1,1.44.177Z" transform="translate(0 0)" fill="#1d1d26"/>
+        </g>
+      </svg>
+
+      <ng-container *ngIf="isShowActive">Deactivated</ng-container>
+      <ng-container *ngIf="!isShowActive">Active</ng-container>
+      <!-- <ng-container *ngIf="!isShowActive">Non Active</ng-container> -->
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="9.215" height="12.555" viewBox="0 0 9.215 12.555">
+        <defs>
+          <clipPath id="clip-path">
+            <rect width="9" height="12.4" fill="none"/>
+          </clipPath>
+        </defs>
+        <g id="_Icons_19_Right_3" data-name="_Icons / 19 Right_3" transform="matrix(1, -0.017, 0.017, 1, 0, 0.157)" clip-path="url(#clip-path)">
+          <path id="_19_Right_3" data-name="19 Right_3" d="M1.44.177l7.2,5.314a.877.877,0,0,1,0,1.417l-7.2,5.314a.912.912,0,0,1-.944.083.884.884,0,0,1-.5-.795V.883A.884.884,0,0,1,.5.093.912.912,0,0,1,1.44.177Z" transform="translate(0 0)" fill="#1d1d26"/>
+        </g>
+      </svg>
+
+    </button>
+  </div>
+  <div class="row">
+    <app-list [data]="listEmployeeActive" [config]="configData" (callback)="routeToDetail($event)" *ngIf="!isShowActive"></app-list>
+    <app-list [data]="listEmployeeResigned" [config]="configData" (callback)="routeToDetail($event)" *ngIf="isShowActive"></app-list>
+
+  </div>
+  <div style="width: 100%">
+    <app-button class="add" style="right: 50px; bottom: 20px; position: absolute;" [buttonType]="{add:true}" (callback)="linkToAdd($event)"></app-button>
+
+  </div>
+
+</div>

@@ -1,0 +1,49 @@
+<!-- <div class="row ci-align-items-center">
+  <div class="col-12 ci-body-text-h1 ci-dflex-modal">
+    {{ "UPDATE_HISTORY"}}
+    <div>
+      <button class="ci-button-cancel" (click)="closeDialog()">
+        {{ "CANCEL"}}
+      </button>
+    </div>
+  </div>
+</div>
+<div class="ci-scroll-modal">
+  <table mat-table class="tableStyle ci-normal-table" [dataSource]="dataSource">
+    <ng-container matColumnDef="Date">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let prescription">
+        {{ prescription.CreatedDate }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let prescription">
+        {{ prescription.Status }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Period">
+      <th mat-header-cell *matHeaderCellDef>Period</th>
+      <td mat-cell *matCellDef="let prescription">
+        {{ prescription.NoOfAccountPurchased }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="Price">
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td mat-cell *matCellDef="let prescription">
+        {{ prescription.Amount }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+</div> -->
+<app-table
+    [data]="dataSub"
+    [config]="configData"
+    [isPopup]="true"
+    [title]="title"
+    (callback)="callbackFromTable($event)"
+></app-table>

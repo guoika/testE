@@ -1,0 +1,9 @@
+<app-menu-header [option]="option">
+</app-menu-header>
+<div class="layout-content">
+    <app-list
+        [data]="data"
+        [config]="configData"
+        (callback)="routeToDetail($event)"
+    ></app-list>
+</div>

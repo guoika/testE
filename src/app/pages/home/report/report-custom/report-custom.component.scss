@@ -1,0 +1,112 @@
+.report-cumstom {
+    width: 730px;
+    height: 500px;
+    .report-button {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        span {
+            font-size: 24px;
+            font-weight: 600;
+        }
+    }
+    .report-list {
+        padding: 0 100px;
+        overflow: auto;
+        height: 450px;
+    }
+    .report-box {
+        height: 60px;
+        border-bottom: 2px solid #707070;
+        padding-top: 20px;
+        font-size: 24px;
+        color: #707070;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-around;
+        position: relative;
+        margin-top: 20px;
+        img {
+            position: absolute;
+            left: -22px;
+            width: 40px;
+            top: 10px;
+        }
+        span {
+            display: block;
+            width: 70px;
+            overflow: hidden;
+        }
+        .report-visible {
+            margin-top: -20px;
+            .Visible {
+                padding: 5px 25px !important;
+                background-color: #707070 !important;
+                color: #fff !important;
+                border-radius: 15px !important;
+                border: none !important;
+            }
+            .not-visible {
+                padding: 5px 25px;
+                border-radius: 15px;
+                border: none;
+                background-color: #fff;
+                box-shadow: 6px 6px 20px -9px #707070;
+                color: #707070;
+                margin-left: 10px;
+            }
+        }
+    }
+}
+.cdk-drag-preview {
+    box-sizing: border-box;
+    border-radius: 4px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14),
+        0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    height: 60px;
+    border-bottom: 2px solid #707070;
+    font-size: 24px;
+    color: #707070;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+
+    img {
+        position: absolute;
+        left: -22px;
+        width: 40px;
+        top: 10px;
+    }
+    span {
+        display: block;
+        width: 70px;
+        overflow: hidden;
+    }
+    .report-visible {
+        margin-top: 0px;
+        .Visible {
+            padding: 5px 25px;
+            background-color: #707070;
+            color: #fff;
+            border-radius: 15px;
+            border: none;
+        }
+        .not-visible {
+            padding: 5px 25px;
+            border-radius: 15px;
+            border: none;
+            background-color: #fff;
+            box-shadow: 6px 6px 20px -9px #707070;
+            color: #707070;
+            margin-left: 10px;
+        }
+    }
+}
+.cdk-drag-placeholder {
+    opacity: 0;
+}
+
+.cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}

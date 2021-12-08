@@ -1,0 +1,10 @@
+<app-menu-header [option]="option">
+</app-menu-header>
+<app-company-detail
+    [data]="listCreate"
+    [dataModel]="model"
+    [option]="option"
+    [button]="btnConfig"
+    [configCss]="configCss"
+    (callback)="handleCallback($event)"
+></app-company-detail>

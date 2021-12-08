@@ -1,0 +1,16 @@
+<div class="modal-exam">
+    <div class="modal-title">
+        <h3>{{data.title}}</h3>
+        <div>
+            <app-button [buttonType]="{ cancel: true, save: true }" [position]="'center'" (callback)="createExam($event)">
+            </app-button>
+        </div>
+    </div>
+    <div class="modal-input">
+        <label for="" *ngIf="data && data.type === 'edit-result' ;else templateExam">Result type:</label>
+        <ng-template #templateExam>
+          <label for="">Exam type: {{data.type}}</label>
+        </ng-template>
+        <input type="text" [(ngModel)]="nameExam">
+    </div>
+</div>

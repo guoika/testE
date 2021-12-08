@@ -1,0 +1,46 @@
+.login-component{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    .login-logo{
+        position: absolute;
+        height: 100px;
+        margin: 30px;
+        left: 0;
+        top: 0;
+    }
+    .container {
+        // margin-top: -80px;
+        margin-top: 80px;
+    }
+    .row {
+        margin-bottom: 2em;
+        a {
+            color: black;
+        }
+        .title {
+            width: 100%;
+            color: #9fb9c8;;
+            font-size: 2.2em;
+        }
+        .ci-button-save{
+            width: 100%;
+        }
+
+    }
+
+}
+u {
+  color: #9FB9C8;
+  cursor: pointer;
+}
+// p {
+//     color: black;
+//     // padding-left: 1.5em;
+//     margin-top: .8em;
+//     // background: #fff;
+// }
+// button {
+//     outline: none;
+// }

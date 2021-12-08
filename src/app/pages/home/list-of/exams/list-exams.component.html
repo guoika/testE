@@ -1,0 +1,238 @@
+<app-menu-header [option]="option">
+</app-menu-header>
+<div class="ci-exam">
+  <!-- <div
+        class="c-loading"
+        [class.c-loading--hidden]="isLoading"
+        id="loading-page"
+    >
+        <div
+            class="c-loading__status spinner-border m-5"
+            role="status"
+        >
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div> -->
+
+
+  <!-- load exam 1 -->
+  <div class="position-r">
+    <ul class="nav" id="e1">
+      <li class="nav-item" *ngFor="let exam of listExamSub" [style.border-bottom]="exam.isActive ? '2px black solid' : ''">
+        <button (click)="onClickActiveExam(exam, listExamSub, true)" class="nav-title btn fz-15 fw-700">
+          {{ exam.Name }}
+        </button>
+        <img (click)="openDialogCreate(exam)" class="tab-icon" src="assets/svg/icon-add.svg" alt="">
+        <img (click)="openDialogEdit(exam)" class="tab-icon" src="assets/svg/icon-edit.svg" alt="">
+        <img *ngIf="exam.Type === 2" (click)="openDialogDelete(exam)" class="tab-icon" src="assets/svg/emr-admin-icon-delete.svg" alt="">
+      </li>
+    </ul>
+  </div>
+  <!-- load exam 2 -->
+  <ng-container>
+    <ng-container *ngFor="let exam of listExamSub">
+      <div class="position-r" *ngIf="exam.isActive === true && exam.level2 !== true">
+        <ul class="nav" id="e2">
+          <li class="nav-item" *ngFor="let i of exam.ListSubExams" [style.border-bottom]="i.isActive ? '2px black solid' : ''">
+            <button class="nav-title btn fz-15 fw-700" (click)="onClickActiveExam(i, exam.ListSubExams)">
+              {{ i.Name }}
+            </button>
+            <img (click)="openDialogCreate(i)" class="tab-icon" src="assets/svg/icon-add.svg" alt="">
+            <img (click)="openDialogEdit(i)" class="tab-icon" src="assets/svg/icon-edit.svg" alt="">
+            <img *ngIf="i.Type === 2" (click)="openDialogDelete(i)" class="tab-icon" src="assets/svg/emr-admin-icon-delete.svg" alt="">
+          </li>
+
+        </ul>
+      </div>
+    </ng-container>
+  </ng-container>
+  <!-- load exam 2.5 -->
+  <ng-container *ngFor="let itemChild1 of listExamSub">
+    <div class="position-r" *ngIf="itemChild1 && itemChild1.isActive === true && itemChild1.level2 === true">
+      <ul class="nav" id="e2.5">
+        <li class="nav-item" *ngFor="let i of itemChild1.ListSubExams" [style.border-bottom]="i.isActive ? '2px black solid' : ''">
+          <button class="nav-title btn fz-15 fw-700" (click)="onClickActiveExam(i, itemChild1.ListSubExams)">
+            {{ i.Name }}
+          </button>
+          <img (click)="openDialogCreate(i)" class="tab-icon" src="assets/svg/icon-add.svg" alt="">
+          <img (click)="openDialogEdit(i)" class="tab-icon" src="assets/svg/icon-edit.svg" alt="">
+          <img *ngIf="i.Type === 2" (click)="openDialogDelete(i)" class="tab-icon" src="assets/svg/emr-admin-icon-delete.svg" alt="">
+        </li>
+
+      </ul>
+      <div class="row listSection-exam" style="max-height: calc(100vh - 350px)" *ngIf="itemChild1 && itemChild1.isActive === true">
+        <ng-container *ngFor="let exam of itemChild1.ListSubExams">
+          <ng-container *ngIf="exam && exam.isActive === true">
+            <div class="col-6" [id]="exam.Name">
+              <ng-container *ngFor="let result of exam.ListResults">
+                <div class="item-exam d-flex  align-items-center" *ngIf="result.LeftRight === 0"
+                    (click)="openChild(result)">
+                    <p>{{result.Name }}</p>
+                      <div class="d-flex">
+                          <img (click)="openDialogResultEdit(result)" class="tab-icon" src="assets/svg/icon-edit.svg" alt="">
+                          <img *ngIf="result.Type === 2" (click)="openDialogResultDelete(result)" class="tab-icon" src="assets/svg/emr-admin-icon-delete.svg" alt="">
+                      </div>
+                </div>
+              </ng-container>
+              <div  class="input">
+                <input type="text" [(ngModel)]="nameResult" name="namecreate">
+                <app-button class="add" [buttonType]="{ add:true}" [isSmall]="true"
+                    (callback)="openDialogResultCreate(0, nameResult, exam.ExamId)"></app-button>
+              </div>
+            </div>
+            <div class="col-6">
+              <div>
+                <div class="row style-bt-mt">
+                  <div class="col-6">
+                    <button class="w-100 title btn mb-2">
+                      {{ "LEFT" }}
+                    </button>
+                    <ng-container *ngFor="let result of exam.ListResults">
+                      <div class="item-exam d-flex  align-items-center"  *ngIf="result.LeftRight === 1"
+                          (click)="openChild(result)">
+                          <p>{{result.Name }}</p>
+                            <div class="d-flex">
+                                <img (click)="openDialogResultEdit(result)" class="tab-icon" src="assets/svg/icon-edit.svg" alt="">
+                                <img *ngIf="result.Type === 2" (click)="openDialogResultDelete(result)" class="tab-icon" src="assets/svg/emr-admin-icon-delete.svg" alt="">
+                            </div>
+                      </div>
+                    </ng-container>
+                    <div  class="input">
+                      <input type="text" [(ngModel)]="nameLeft" name="namecreate">
+                      <app-button class="add" [buttonType]="{ add:true}" [isSmall]="true"
+                          (callback)="openDialogResultCreate(1, nameLeft, exam.ExamId)"></app-button>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <button class="btn w-100 title mb-2">
+                      {{ "RIGHT" }}
+                    </button>
+                    <ng-container *ngFor="let result of exam.ListResults">
+                      <div class="item-exam d-flex  align-items-center"  *ngIf="result.LeftRight === 2"
+                          (click)="openChild(result)">
+                          <p>{{result.Name }}</p>
+                            <div class="d-flex">
+                                <img (click)="openDialogResultEdit(result)" class="tab-icon" src="assets/svg/icon-edit.svg" alt="">
+                                <img *ngIf="result.Type === 2" (click)="openDialogResultDelete(result)" class="tab-icon" src="assets/svg/emr-admin-icon-delete.svg" alt="">
+                            </div>
+                      </div>
+                    </ng-container>
+                    <div  class="input">
+                      <input type="text" [(ngModel)]="nameRight" name="namecreate">
+                      <app-button class="add" [buttonType]="{ add:true}" [isSmall]="true"
+                          (callback)="openDialogResultCreate(2, nameRight, exam.ExamId)"></app-button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </ng-container>
+        </ng-container>
+
+      </div>
+    </div>
+  </ng-container>
+  <!-- load exam 3 -->
+  <ng-container *ngFor="let item of listExamSub">
+    <ng-container *ngIf="item && item.isActive === true">
+      <ng-container *ngFor="let itemChild1 of item.ListSubExams">
+        <div class="position-r" *ngIf="itemChild1.isActive === true && itemChild1.level2 !== true" id="nono">
+          <ul class="nav" id="e3">
+            <li class="nav-item" *ngFor="let i of itemChild1.ListSubExams" [style.border-bottom]="i.isActive ? '2px black solid' : ''">
+              <button class="nav-title btn fz-15 fw-700" (click)="onClickActiveExam(i, itemChild1.ListSubExams)">
+                {{ i.Name }}
+              </button>
+              <img (click)="openDialogCreate(i)" class="tab-icon" src="assets/svg/icon-add.svg" alt="">
+              <img (click)="openDialogEdit(i)" class="tab-icon" src="assets/svg/icon-edit.svg" alt="">
+              <img *ngIf="i.Type === 2" (click)="openDialogDelete(i)" class="tab-icon" src="assets/svg/emr-admin-icon-delete.svg" alt="">
+            </li>
+
+          </ul>
+        </div>
+        <ng-container>
+          <div class="row listSection-exam" style="max-height: calc(100vh - 426px)" *ngIf="itemChild1 && itemChild1.isActive === true && itemChild1.level2 !== true">
+            <div class="col-6">
+              <ng-container *ngFor="let exam of itemChild1.ListSubExams">
+                <ng-container *ngIf="exam.isActive === true">
+                  <ng-container *ngFor="let result of exam.ListResults">
+                    <div class="item-exam d-flex  align-items-center"  *ngIf="result.LeftRight === 0"
+                        (click)="openChild(result)">
+                        <p>{{result.Name }}</p>
+                          <div class="d-flex">
+                              <img (click)="openDialogResultEdit(result)" class="tab-icon" src="assets/svg/icon-edit.svg" alt="">
+                              <img *ngIf="result.Type === 2" (click)="openDialogResultDelete(result)" class="tab-icon" src="assets/svg/emr-admin-icon-delete.svg" alt="">
+                          </div>
+                    </div>
+                  </ng-container>
+                  <div  class="input">
+                    <input type="text" [(ngModel)]="nameResult" name="namecreate">
+                    <app-button class="add" [buttonType]="{ add:true}" [isSmall]="true"
+                        (callback)="openDialogResultCreate(0, nameResult, exam.ExamId)"></app-button>
+                  </div>
+                </ng-container>
+              </ng-container>
+
+            </div>
+            <div class="col-6">
+              <ng-container *ngFor="let exam of itemChild1.ListSubExams">
+                <ng-container *ngIf="exam.isActive === true">
+
+                  <div>
+                    <div class="row style-bt-mt">
+                      <div class="col-6">
+                        <button class="w-100 title btn mb-2">
+                          {{ "LEFT" }}
+                        </button>
+                        <ng-container *ngFor="let result of exam.ListResults">
+                          <div class="item-exam d-flex  align-items-center"  *ngIf="result.LeftRight === 1"
+                              (click)="openChild(result)">
+                              <p>{{result.Name }}</p>
+                                <div class="d-flex">
+                                    <img (click)="openDialogResultEdit(result)" class="tab-icon" src="assets/svg/icon-edit.svg" alt="">
+                                    <img *ngIf="result.Type === 2" (click)="openDialogResultDelete(result)" class="tab-icon" src="assets/svg/emr-admin-icon-delete.svg" alt="">
+                                </div>
+                          </div>
+                        </ng-container>
+                        <div  class="input">
+                          <input type="text" [(ngModel)]="nameLeft" name="namecreate">
+                          <app-button class="add" [buttonType]="{ add:true}" [isSmall]="true"
+                              (callback)="openDialogResultCreate(1, nameLeft, exam.ExamId)"></app-button>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <button class="btn w-100 title mb-2">
+                          {{ "RIGHT" }}
+                        </button>
+                        <ng-container *ngFor="let result of exam.ListResults">
+                          <div class="item-exam d-flex  align-items-center"  *ngIf="result.LeftRight === 2"
+                              (click)="openChild(result)">
+                              <p>{{result.Name }}</p>
+                                <div class="d-flex">
+                                    <img (click)="openDialogResultEdit(result)" class="tab-icon" src="assets/svg/icon-edit.svg" alt="">
+                                    <img *ngIf="result.Type === 2" (click)="openDialogResultDelete(result)" class="tab-icon" src="assets/svg/emr-admin-icon-delete.svg" alt="">
+                                </div>
+                          </div>
+                        </ng-container>
+                        <div  class="input">
+                          <input type="text" [(ngModel)]="nameRight" name="namecreate">
+                          <app-button class="add" [buttonType]="{ add:true}" [isSmall]="true"
+                              (callback)="openDialogResultCreate(2, nameRight, exam.ExamId)"></app-button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+              </ng-container>
+
+
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+
+
+</div>

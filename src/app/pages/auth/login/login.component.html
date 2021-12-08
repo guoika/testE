@@ -1,0 +1,65 @@
+<div class="login-component">
+    <img
+        src="assets/svg/logo.svg"
+        alt=""
+        class="login-logo"
+    >
+    <form class="container">
+        <div class="row">
+            <div class="col-5 mx-auto">
+                <div class="title">
+                    Sign In
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        </div>
+
+        <div class="row">
+            <div class="col-5 mx-auto">
+                <input
+                    class="ci-input-login "
+                    [(ngModel)]="model.userName"
+                    type="text"
+                    name="userName"
+                    placeholder="Username"
+                >
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5 mx-auto">
+                <input
+                    class="ci-input-login "
+                    [(ngModel)]="model.pwd"
+                    type="password"
+                    name="pwd"
+                    placeholder="Password"
+                >
+                <p *ngIf="error" style="color: red;">Sai tên đăng nhập hoặc mật khẩu. Hãy thử lại</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-5 mx-auto d-flex justify-content-between">
+                <!-- <mat-checkbox [checked]="checked" (change)="check($event.checked)">Remember me</mat-checkbox> -->
+                <!-- <a routerLink="forgot-password">Forgot password?</a> -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-5 mx-auto">
+                <button
+                    class="ci-button-save"
+                    (click)="login()"
+                >
+                    Sign in
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5 mx-auto text-center">
+                Don't have an account? <u (click)="signUp()">Sign up</u>
+            </div>
+        </div>
+    </form>
+</div>

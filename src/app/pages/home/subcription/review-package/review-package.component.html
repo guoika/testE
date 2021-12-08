@@ -1,0 +1,43 @@
+<div class="container">
+  <form [formGroup]="payForm">
+    <div class="row">
+      <label for="">Number of account you need (Minimum: 20)</label>
+      <div class="col-12">
+        <input class="ci-input-login" type="number" name="NumberOfAccount"(ngModelChange)="check($event)"
+             autocomplete="off" formControlName="NumberOfAccount"
+             required>
+      </div>
+    </div>
+    <div class="row">
+      <label for="">Payment Method</label>
+      <div class="row payment">
+        <div class="icon col-3">
+          <img src="assets/svg/paypal.svg" alt="">
+        </div>
+        <div class="icon col-6">
+          {{pay.ShowName}}
+          <!-- (Default) -->
+        </div>
+        <div class="icon col-3">
+          <app-button class="action" [buttonType]="button?.listChange" (callback)="callBack($event)"></app-button>
+          <!-- (Default) -->
+        </div>
+      </div>
+    </div>
+    <hr/>
+    <div class="row">
+      <div class="col-6 context">
+        <span>Total Amount</span>
+      </div>
+      <div class="col-6 context2">
+        <span>${{totalAmount}}</span>
+      </div>
+    </div>
+  </form>
+
+  <div class="content row" >
+    <div class="col-12 d-flex align-item-center justify-content-center ">
+      <app-button class="action" [buttonType]="button?.listUpdate" (callback)="callBack($event)"></app-button>
+    </div>
+  </div>
+</div>

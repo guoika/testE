@@ -1,0 +1,132 @@
+<div class="login-component">
+  <div class="form-container">
+    <div class="icon">
+      <img src="assets/svg/logo.svg" alt="" class="login-logo">
+      <div class="img">
+        <img src="assets/png/Home.png" alt="">
+      </div>
+      <br />
+      <div class="title">
+        <p>Signup now to enjoy a
+        </p>
+        <p>1 month free trial</p>
+      </div>
+
+    </div>
+    <div class="container">
+      <form [formGroup]="loginForm">
+        <div class="row">
+          <div class="col-10 mx-auto">
+            <div class="title">
+              Sign up <br />
+              <span class="se-row">an account for your clinic</span>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row" [ngClass]="{'mar-1': lstError.includes('CompanyName') || lstRequired.includes('CompanyName')}">
+          <div class="col-10 mx-auto">
+            <input class="ci-input-login" type="text" name="ClinicName" placeholder="Your clinic name*"
+              autocomplete="off" formControlName="CompanyName" required>
+            <div class="invalid-feedback" style="display: block;" *ngIf="lstError.includes('CompanyName')">
+              <div>The clinic name must be 255 characters or less</div>
+            </div>
+            <div class="invalid-feedback" style="display: block;" *ngIf="lstRequired.includes('CompanyName')">
+              <div>Please fill all required fields in order to sign up.</div>
+            </div>
+          </div>
+
+        </div>
+        <div class="form-signup">
+          <div class="row" [ngClass]="{'mar-1': lstError.includes('FullName') || lstRequired.includes('FullName')}">
+            <div class="col-10 mx-auto">
+              <input class="ci-input-login" type="text" name="FullName" placeholder="Your full name*"
+                autocomplete="off" formControlName="FullName"
+                required>
+              <div class="invalid-feedback" style="display: block;" *ngIf="lstError.includes('FullName')">
+                <div>The full name must be 255 characters or less</div>
+              </div>
+              <div class="invalid-feedback" style="display: block;" *ngIf="lstRequired.includes('FullName')">
+                <div>Please fill all required fields in order to sign up.</div>
+              </div>
+            </div>
+          </div>
+          <div class="row" [ngClass]="{'mar-1': lstError.includes('Email') || lstRequired.includes('Email') || dupEmail === true}">
+            <div class="col-10 mx-auto">
+              <input class="ci-input-login" type="text" name="Email" placeholder="Your email*" autocomplete="off"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" formControlName="Email" required>
+              <div class="invalid-feedback" style="display: block;" *ngIf="lstError.includes('Email')">
+                <div>Invalid email address</div>
+              </div>
+              <div class="invalid-feedback" style="display: block;" *ngIf="lstRequired.includes('Email')">
+                <div>Please fill all required fields in order to sign up.</div>
+              </div>
+              <div class="invalid-feedback" style="display: block;" *ngIf="dupEmail === true">
+                <div>This email address is already exists.</div>
+              </div>
+            </div>
+          </div>
+          <div class="row" [ngClass]="{'mar-1': lstError.includes('Password') || lstRequired.includes('CompanyName')}">
+            <div class="col-10 mx-auto">
+              <input class="ci-input-login" type="password" name="Password" placeholder="Password*" autocomplete="new-password"
+                formControlName="Password" required>
+              <div class="invalid-feedback" style="display: block;" *ngIf="lstError.includes('Password')">
+                <div>The password must be between 6 to 20 characters</div>
+              </div>
+              <div class="invalid-feedback" style="display: block;" *ngIf="lstRequired.includes('Password')">
+                <div>Please fill all required fields in order to sign up.</div>
+              </div>
+            </div>
+            <!-- <div class="col-6 mx-auto">
+              <input class="ci-input-login"  type="text" name="phone" pattern=".{6,}" placeholder="Password"
+                  required
+                >
+              <div *ngIf="model.submitted && Password.invalid " class="invalid-feedback">
+                <div *ngIf="Password.errors.required">Do not leave the password blank</div>
+              </div>
+              <p class="invalid-feedback" *ngIf="Password.errors?.pattern">
+                Password at least 6 characters
+              </p>
+            </div>
+            <div class="col-6 mx-auto">
+              <input class="ci-input-login"  type="text" name="phone" pattern=".{6,}" placeholder="Password"
+                 required
+                >
+              <div *ngIf="model.submitted && Password.invalid " class="invalid-feedback">
+                <div *ngIf="Password.errors.required">Do not leave the password blank</div>
+              </div>
+              <p class="invalid-feedback" *ngIf="Password.errors?.pattern">
+                Password at least 6 characters
+              </p>
+            </div> -->
+          </div>
+          <div class="row" [ngClass]="{'mar-1': lstError.includes('ConfirmPassword')}">
+            <div class="col-10 mx-auto">
+              <input class="ci-input-login" type="password" name="ConfirmPassword" placeholder="Confirm Password*"
+                autocomplete="off" formControlName="ConfirmPassword" required>
+              <div class="invalid-feedback" style="display: block;" *ngIf="lstError.includes('ConfirmPassword')">
+                <div>Password and Confirm Password do not match</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-10 mx-auto">
+            <button class="ci-button-login" (click)="registerAccount()">
+              Sign up
+            </button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 mx-auto text-center" style="font-size: 20px;">
+            Already have an account? <u (click)="login()">Sign in</u>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>

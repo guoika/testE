@@ -1,0 +1,23 @@
+<div class="report-cumstom">
+    <div class="report-button">
+        <span>Customize columns</span>
+        <app-button [buttonType]="{ cancel: true, save: true }" [position]="'center'"
+            (callback)="updateCustomReport($event)">
+        </app-button>
+    </div>
+    <div cdkDropList class="report-list" (cdkDropListDropped)="drop($event )">
+        <div class="report-box" *ngFor="let item of listForm ; let i = index" cdkDrag>
+            <img src=" assets/svg/Pointer.png" alt="">
+            <span>
+                {{item.ColumnName}}
+            </span>
+            <div class="report-visible">
+                <button (click)="clickNotActive(item)" [class]="item.SequenceNumber !=null ? 'Visible' : ''"
+                    class="not-visible">Visible</button>
+                <button (click)="clickActive(item)" [class]="item.SequenceNumber ===null ? 'Visible' : ''"
+                    class="not-visible">Not visible</button>
+
+            </div>
+        </div>
+    </div>
+</div>

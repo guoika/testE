@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <label for=""> <label for="">Choose another payment method</label></label>
+  </div>
+  <div class="row" *ngFor="let item of paymentMethod">
+    <div class="row payment" id="23">
+      <div class="icon col-3">
+        <img src="assets/svg/paypal.svg" alt="">
+      </div>
+      <div class="icon col-6">
+        {{item.ShowName}}
+        <!-- (Default) -->
+      </div>
+      <div class="icon col-3">
+        <app-button class="action" [buttonType]="button?.listChange" (callback)="chooseItem(item)"></app-button>
+        <!-- (Default) -->
+      </div>
+    </div>
+  </div>
+
+  <div class="content row" >
+    <div class="col-12 d-flex align-item-center justify-content-center ">
+      <app-button class="action" [buttonType]="button?.listUpdate" (callback)="callBack($event)"></app-button>
+    </div>
+  </div>
+</div>

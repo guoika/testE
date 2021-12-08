@@ -1,0 +1,24 @@
+<div class="list-layout">
+    <ng-container *ngFor="let item of listExams; let i = index">
+      <div class="item">
+        <div class="title" *ngIf="item.edit === false" (click)="onCallBack(item, i)" [class.active]="item.isActive === true"
+            [style.font-weight]="i === currentIndex ? '600' : '400' ">
+            {{item?.Name}}
+        </div>
+        <input type="text" *ngIf="item.edit === true" [(ngModel)]="item.Name" name="nameedit">
+        <div class="button-all d-flex">
+            <app-button class="button" [buttonType]="{ edit : true}" [isSmall]="true"
+                (callback)="editItem(item)"></app-button>
+            <app-button *ngIf="item.Type !== 1" class="button" [buttonType]="{ delete : true}" [isSmall]="true"
+                (callback)="onCallBack(item,$event)"></app-button>
+        </div>
+
+      </div>
+    </ng-container>
+
+    <div *ngIf="create" class="input">
+        <input type="text" [(ngModel)]="name" name="namecreate">
+        <app-button class="add" [buttonType]="{ add:true}" [isSmall]="true"
+            (callback)="add()"></app-button>
+    </div>
+</div>
